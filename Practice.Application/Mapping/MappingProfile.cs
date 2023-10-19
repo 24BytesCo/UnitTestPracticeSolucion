@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Practice.Application.DTOs;
+using Practice.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,9 @@ namespace Practice.Application.Mapping
 {
     public class MappingProfile: Profile
     {
+        public MappingProfile() 
+        {
+            CreateMap<Course, CourseDTO>().ReverseMap();
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Practice.Application.DTOs;
 using Practice.Domain;
 using Practice.Persistence;
 using System;
@@ -11,23 +13,26 @@ using System.Threading.Tasks;
 
 namespace Practice.Application.Feature.Courses.Queries
 {
-    public class GetAllCoursesQueryHandled : IRequestHandler<GetAllCoursesQueryRequest, List<Course>>
+    public class GetAllCoursesQueryHandled : IRequestHandler<GetAllCoursesQueryRequest, List<CourseDTO>>
     {
         private readonly PracticeDbContext _context;
 
-        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public GetAllCoursesQueryHandled(PracticeDbContext context, IMediator mediator)
+        public GetAllCoursesQueryHandled(PracticeDbContext context, IMapper mapper)
         {
             _context = context;
-            _mediator = mediator;
+            _mapper = mapper;
         }
 
 
 
-        public async Task<List<Course>> Handle(GetAllCoursesQueryRequest request, CancellationToken cancellationToken)
+        public async Task<List<CourseDTO>> Handle(GetAllCoursesQueryRequest request, CancellationToken cancellationToken)
         {
-            return await _context.Courses.ToListAsync(cancellationToken: cancellationToken);
+            var allCourses = await _context.Courses.ToListAsync(cancellationToken: cancellationToken);
+
+            return _mapper.Map<List<Course>, List<CourseDTO>>(allCourses);
+
         }
     }
 }
