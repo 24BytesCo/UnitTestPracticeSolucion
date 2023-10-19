@@ -22,7 +22,7 @@ namespace Practice.Domain
         }
 
         // Método IsValid es invocado durante la validación para determinar si la fecha es futura.
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
             bool isValid = false;
 
