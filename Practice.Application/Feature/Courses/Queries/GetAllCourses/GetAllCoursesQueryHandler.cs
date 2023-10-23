@@ -11,15 +11,15 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Practice.Application.Feature.Courses.Queries
+namespace Practice.Application.Feature.Courses.Queries.GetAllCourses
 {
-    public class GetAllCoursesQueryHandled : IRequestHandler<GetAllCoursesQueryRequest, List<CourseDTO>>
+    public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQueryRequest, List<CourseDTO>>
     {
         private readonly PracticeDbContext _context;
 
         private readonly IMapper _mapper;
 
-        public GetAllCoursesQueryHandled(PracticeDbContext context, IMapper mapper)
+        public GetAllCoursesQueryHandler(PracticeDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
